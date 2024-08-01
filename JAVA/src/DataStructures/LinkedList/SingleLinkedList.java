@@ -18,12 +18,12 @@ public class SingleLinkedList implements LinkedList{
         this.head = null;
         this.length = 0;
     }
+
     public void add(int data) {
         SingleNode node = new SingleNode(data);
         this.length++;
         if (this.head == null){
             this.head = node;
-            return;
         }
         else{
             SingleNode curr = this.head;
@@ -31,13 +31,17 @@ public class SingleLinkedList implements LinkedList{
                 curr = curr.getNext();
             }
             curr.setNext(node);
-            return;
         }
+        return;
 
     }
 
     public void pop(){
         if (this.head == null){
+            return;
+        }
+        else if (this.length < 2) {
+            this.head = null;
             return;
         }
         else{
@@ -118,6 +122,35 @@ public class SingleLinkedList implements LinkedList{
         this.length --;
     }
 
+    public void insertAndSort(int data){
+        SingleNode node = new SingleNode(data);
+        this.length++;
+        if (this.head == null){
+            this.head = node;
+        }
+        else{
+            SingleNode curr = this.head;
+            while(true){
+                if(curr.getNext() == null){
+                    curr.setNext(node);
+                    break;
+                }
+                else if(curr.getNext().getValue() > data){
+                    SingleNode temp = curr.getNext();
+                    curr.setNext(node);
+                    node.setNext(temp);
+                    break;
+
+                }
+                else {
+                    curr = curr.getNext();
+                }
+            }
+        }
+        this.length++;
+        return;
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
@@ -131,11 +164,10 @@ public class SingleLinkedList implements LinkedList{
         return str.toString();
     }
 
-    public static void test(){
+    public static void test(int [] testArray){
         SingleLinkedList singleLinkedList = new SingleLinkedList();
-        int [] test = {1,2,3,4,5,6,14,19,2,5,7};
-        for (int i : test){
-            singleLinkedList.add(i);
+        for (int i : testArray){
+            singleLinkedList.insertAndSort(i);
         }
         System.out.println("Initial Linked List");
         System.out.println(singleLinkedList);
@@ -163,8 +195,8 @@ public class SingleLinkedList implements LinkedList{
         System.out.println(" ");
 
         index = 5;
-        data  = singleLinkedList.valueAt(index);
-        System.out.println("The value at index "+index+" is "+data);
+        data  = singleLinkedList.valueAt( index );
+        System.out.println( "The value at index " + index + " is " + data );
         System.out.println(" ");
 
         System.out.println("The final List is");

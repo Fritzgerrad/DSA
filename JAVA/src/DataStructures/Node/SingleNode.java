@@ -31,6 +31,7 @@ public class SingleNode implements Node{
 
     @Override
     public String toString() {
-        return this.getValue() + "->" + this.next.getValue();
+        String nextVal = this.next != null  ? Integer.toString(this.next.getValue()) : "";
+        return this.getValue() + "|->" + nextVal;
     }
 }

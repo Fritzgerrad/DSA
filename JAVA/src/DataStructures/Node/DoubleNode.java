@@ -41,4 +41,12 @@ public class DoubleNode implements Node {
     public void setNext(DoubleNode next) {
         this.next = next;
     }
+
+    @Override
+    public String toString() {
+        String nextVal = this.next != null  ? Integer.toString(this.next.getValue()) : "";
+        String prevVal = this.prev != null  ? Integer.toString(this.prev.getValue()) : "";
+
+        return prevVal + "<-|"+this.getValue() + "|->" + nextVal;
+    }
 }
